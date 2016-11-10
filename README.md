@@ -27,3 +27,14 @@ name=HELLOgg
 
 **???**
 It seems like QueueLength is the maximum connection that masterSocket can wait? Not sure about this.
+
+Put socket in listening mode and set the size of the queue of unprocessed connections
+
+~~~cpp
+  error = listen( masterSocket, QueueLength);
+  if ( error ) {
+    perror("listen");
+    exit( -1 );
+  }
+
+~~~
