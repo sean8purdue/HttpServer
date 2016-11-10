@@ -1,6 +1,5 @@
 # CS252 Prjoect5 _ Web Server
 
----------------
 Programmer:  Sean 
 
 sean8purdue@gmail.com
