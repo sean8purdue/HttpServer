@@ -50,7 +50,7 @@ main( int argc, char ** argv )
   }
 
   // Test perror()
-  perror("TestPerror");
+  //perror("TestPerror");
   
   // Get the port from the arguments
   int port = atoi( argv[1] );
