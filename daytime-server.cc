@@ -35,7 +35,9 @@ const char * usage =
 #include <stdio.h>
 #include <time.h>
 
-int QueueLength = 5;
+//int QueueLength = 5;
+// Test listen(masterSocket, QueueLength);
+int QueueLength = 2;
 
 // Processes time request
 void processTimeRequest( int socket );

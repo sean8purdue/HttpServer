@@ -10,7 +10,7 @@ November 8th, 2016
 
 ## Part1
 
-1. Test For perror("TestPerror");
+1.Test for `perror("TestPerror")`;
 
 perror just print the String, the program still continue running through.
 
@@ -23,4 +23,7 @@ name=HELLOgg
 ~~~
 
 
-2. 
+2.Test `listen(masterSocket, QueueLength)`;
+
+**???**
+It seems like QueueLength is the maximum connection that masterSocket can wait? Not sure about this.
