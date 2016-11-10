@@ -1,0 +1,20 @@
+# Executables
+daytime-client
+daytime-server
+use-dlopen
+
+# Debug Files
+*.dSYM/
+
+# Others
+*.swp
+*.swo
+*.swn
+.*.sw[a-z]
+*~
+.*~
+*#
+.*#
+*.o
+*.so
+myhttpd
