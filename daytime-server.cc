@@ -35,6 +35,8 @@ const char * usage =
 #include <stdio.h>
 #include <time.h>
 
+//int QueueLength = 2;
+// Test listen(masterSocket, QueueLength);
 int QueueLength = 5;
 
 // Processes time request
@@ -48,6 +50,9 @@ main( int argc, char ** argv )
     fprintf( stderr, "%s", usage );
     exit( -1 );
   }
+
+  // Test perror()
+  //perror("TestPerror");
   
   // Get the port from the arguments
   int port = atoi( argv[1] );
