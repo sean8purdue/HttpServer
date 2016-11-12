@@ -38,3 +38,36 @@ Put socket in listening mode and set the size of the queue of unprocessed connec
   }
 
 ~~~
+
+## Memory Dump for Debug
+
+* Output send contents on Server Screen
+
+Like this
+
+~~~
+➜  Desktop telnet data.cs.purdue.edu 1200
+Trying 128.10.2.13...
+Connected to data.cs.purdue.edu.
+Escape character is '^]'.
+
+Type your name:first try
+
+Hi first try the time is:
+Fri Nov 11 23:32:32 2016
+
+Connection closed by foreign host.
+
+---------------------------------
+Old Version output:
+➜  Desktop telnet data.cs.purdue.edu 1200
+Trying 128.10.2.13...
+Connected to data.cs.purdue.edu.
+Escape character is '^]'.
+
+Type your name:first try
+
+Connection closed by foreign host.
+~~~
+
+
