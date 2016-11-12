@@ -58,16 +58,46 @@ Fri Nov 11 23:32:32 2016
 
 Connection closed by foreign host.
 
+--------------
+
+➜  lab5 git:(feature/memdumpDebug) ./daytime-server 1200
+name=first try
+
+Hi first try the time is:
+Fri Nov 11 23:32:32 2016
+
 ---------------------------------
 Old Version output:
+
+➜  lab5 git:(feature/memdumpDebug) ./daytime-server 1200
+name=first try
+
+~~~
+
+* Memdump request and send of server
+
+Recover daytime-server.cc to old version, create two new files for memdump and output sending contents on server screen.
+
+1. Memdump sending contents from server, the output of server screen should be like this:
+
+~~~
 ➜  Desktop telnet data.cs.purdue.edu 1200
-Trying 128.10.2.13...
+Trying 128.10.12.13...
 Connected to data.cs.purdue.edu.
 Escape character is '^]'.
 
-Type your name:first try
+Type your name:lg
+
+Hi lg the time is:
+Sat Nov 12 00:25:22 2016
 
 Connection closed by foreign host.
-~~~
 
+--------------
+
+➜  lab5 git:(feature/memdumpDebug) ✗ daytime-server 1200
+name=lg
+<0x0a,.><0x48,H><0x69,i><0x20, ><0x6c,l><0x67,g><0x20, ><0x74,t><0x68,h><0x65,e><0x20, ><0x74,t><0x69,i><0x6d,m><0x65,e><0x20, ><0x69,i><0x73,s><0x3a,:><0x0a,.><0x53,S><0x61,a><0x74,t><0x20, ><0x4e,N><0x6f,o><0x76,v><0x20, ><0x31,1><0x32,2><0x20, ><0x30,0><0x30,0><0x3a,:><0x32,2><0x35,5><0x3a,:><0x32,2><0x32,2><0x20, ><0x32,2><0x30,0><0x31,1><0x36,6><0x0a,.><0x0a,.>
+
+~~~
 
