@@ -153,7 +153,7 @@ processTimeRequest( int fd )
 	  ( n = read( fd, &newChar, sizeof(newChar) ) ) > 0 ) {
 
 	  // memdump request from client
-	  //memdump( (unsigned char*) &newChar, 1);
+	  memdump( (unsigned char*) &newChar, 1);
 
     if ( lastChar == '\015' && newChar == '\012' ) {
       // Discard previous <CR> from name
@@ -170,7 +170,7 @@ processTimeRequest( int fd )
   // Add null character at the end of the string
   name[ nameLength ] = 0;
 
-  printf( "name=%s\n", name );
+  printf( "\nname=%s\n", name );
 
   // Get time of day
   time_t now;
