@@ -174,10 +174,20 @@ processTimeRequest( int fd )
   write( fd, name, strlen( name ) );
   write( fd, timeIs, strlen( timeIs ) );
   
+  // output send contents to server screen
+  write( 2, hi, strlen( hi ) );
+  write( 2, name, strlen( name ) );
+  write( 2, timeIs, strlen( timeIs ) );
+
   // Send the time of day 
   write(fd, timeString, strlen(timeString));
+  // output send contents to server screen
+  write( 2, timeString, strlen(timeString));
 
   // Send last newline
   const char * newline="\n";
   write(fd, newline, strlen(newline));
+  // output send contents to server screen
+  write( 2, newline, strlen(newline));
+  
 }
