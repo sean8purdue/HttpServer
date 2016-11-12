@@ -41,13 +41,6 @@ int QueueLength = 5;
 
 // Processes time request
 void processTimeRequest( int socket );
-void memdump(unsigned char * buffer, int n) {
-	for (int i = 0; i < n; i++) {
-		int c = buffer[i];
-		fprintf(stderr, "<0x%02x,%c>", c, (c < 127 & c >= 32) ? c : '.');
-		//fprintf(stderr, "<0x%02x,%c>\n", c, (c < 127 & c >= 32) ? c : '.');
-	}
-}
 
 int
 main( int argc, char ** argv )
@@ -152,9 +145,6 @@ processTimeRequest( int fd )
   while ( nameLength < MaxName &&
 	  ( n = read( fd, &newChar, sizeof(newChar) ) ) > 0 ) {
 
-	  // memdump request from client
-	  memdump( (unsigned char*) &newChar, 1);
-
     if ( lastChar == '\015' && newChar == '\012' ) {
       // Discard previous <CR> from name
       nameLength--;
@@ -170,7 +160,7 @@ processTimeRequest( int fd )
   // Add null character at the end of the string
   name[ nameLength ] = 0;
 
-  printf( "\nname=%s\n", name );
+  printf( "name=%s\n", name );
 
   // Get time of day
   time_t now;
@@ -183,18 +173,21 @@ processTimeRequest( int fd )
   write( fd, hi, strlen( hi ) );
   write( fd, name, strlen( name ) );
   write( fd, timeIs, strlen( timeIs ) );
-
-  // memdump send contents from server
-  memdump( (unsigned char*) hi, strlen(hi) );
-  memdump( (unsigned char*) name, strlen(name) );
-  memdump( (unsigned char*) timeIs, strlen(timeIs) );
   
+  // output send contents to server screen
+  write( 2, hi, strlen( hi ) );
+  write( 2, name, strlen( name ) );
+  write( 2, timeIs, strlen( timeIs ) );
+
   // Send the time of day 
   write(fd, timeString, strlen(timeString));
-  memdump( (unsigned char*) timeString, strlen(timeString) );
+  // output send contents to server screen
+  write( 2, timeString, strlen(timeString));
 
   // Send last newline
   const char * newline="\n";
   write(fd, newline, strlen(newline));
-  memdump( (unsigned char*) newline, strlen(newline) );
+  // output send contents to server screen
+  write( 2, newline, strlen(newline));
+  
 }
