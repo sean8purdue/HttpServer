@@ -145,14 +145,16 @@ void processRequest(int socket) {
 
 	// get content type
 	char contentType[size + 1] = {0};
-	strcpy(contentType, "text/html");
+	//strcpy(contentType, "text/html");
+	strcpy(contentType, "image/gif");
 
 	// test send single file: main index file
-	strcat(cwd, "/http-root-dir/htdocs/index.html");
+	strcat(cwd, "/http-root-dir/htdocs/pictures.gif");
 	fprintf(stderr, "cwd = %s\n", cwd);
 
 	FILE *document;
-	document = fopen(cwd, "r");
+	//document = fopen(cwd, "r");
+	document = fopen(cwd, "rb");
 
 
 	write(socket, "HTTP/1.1 200 OK", 15);
