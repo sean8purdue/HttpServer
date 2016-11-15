@@ -144,8 +144,11 @@ void processRequest(int socket) {
 	fprintf(stderr, "\n");
 
 	fprintf(stderr, "%lu\n", sizeof(cwd));
-	fprintf(stderr, "cwd = %s\n", cwd);
 	// test done
+	
+	strcat(cwd, "/http-root-dir/");
+	fprintf(stderr, "cwd = %s\n", cwd);
+
 
 }
 
