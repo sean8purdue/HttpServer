@@ -1,4 +1,6 @@
 CXX = g++ -fPIC
+# add gdb output
+#CXX = g++ -g -fPIC
 NETLIBS= -lnsl -lpthread
 
 all: daytime-server daytime-client use-dlopen hello.so myhttpd

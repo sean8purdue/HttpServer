@@ -181,6 +181,7 @@ processTimeRequest( int fd )
   const char * hi = "\nHi ";
   const char * timeIs = " the time is:\n";
   write( fd, hi, strlen( hi ) );
+  // strlen return 3 for hi;
   write( fd, name, strlen( name ) );
   write( fd, timeIs, strlen( timeIs ) );
 
