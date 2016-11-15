@@ -137,18 +137,41 @@ void processRequest(int socket) {
 	// test get current working directory
 	char cwd[size + 1] = {0};
 	getcwd(cwd, sizeof(cwd));
-	int i;
-	for(i = 0; i < 1025; i++) 
-		fprintf(stderr, "%c", cwd[i]);
-	
 	fprintf(stderr, "\n");
 
 	fprintf(stderr, "%lu\n", sizeof(cwd));
 	// test done
 	
-	strcat(cwd, "/http-root-dir/");
+
+	// get content type
+	char contentType[size + 1] = {0};
+	strcpy(contentType, "text/html");
+
+	// test send single file: main index file
+	strcat(cwd, "/http-root-dir/htdocs/index.html");
 	fprintf(stderr, "cwd = %s\n", cwd);
 
+	FILE *document;
+	document = fopen(cwd, "r");
+
+
+	write(socket, "HTTP/1.1 200 OK", 15);
+	write(socket, "\r\n", 2);
+	write(socket, "Server: Mattserv/1.0", 20);
+	write(socket, "\r\n", 2);
+	write(socket, "Content-Type: ", 14);
+	write(socket, contentType, strlen(contentType));
+	write(socket, "\r\n", 2);
+	write(socket, "\r\n", 2);
+
+	long count = 0;
+
+	char c;
+	while (count = read(fileno(document), &c, sizeof(c)))
+		if (write(socket, &c, sizeof(c)) != count)
+			perror("write");
+
+	fclose(document);
 
 }
 
