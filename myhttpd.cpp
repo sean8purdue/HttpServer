@@ -36,7 +36,9 @@ const char * usage =
 int QueueLength = 5;
 
 // Processes time request
-void processTimeRequest( int socket );
+//void processTimeRequest( int socket );
+void processRequest( int socket );
+
 void memdump(unsigned char * buffer, int n) {
 	for (int i = 0; i < n; i++) {
 		int c = buffer[i];
@@ -111,7 +113,8 @@ int main( int argc, char ** argv )
     }
 
     // Process request.
-    processTimeRequest( slaveSocket );
+    //processTimeRequest( slaveSocket );
+    processRequest( slaveSocket );
 
     // Close socket
     close( slaveSocket );
@@ -119,81 +122,108 @@ int main( int argc, char ** argv )
   
 }
 
-void
-processTimeRequest( int fd )
-{
-  // Buffer used to store the name received from the client
-  const int MaxName = 1024;
-  char name[ MaxName + 1 ];
-  int nameLength = 0;
-  int n;
+void processRequest(int socket) {
+	const int size = 1024;
+	char currString[size + 1];
+	int length = 0;
+	int n;
 
-  // Send prompt
-  const char * prompt = "\nType your name:";
-  write( fd, prompt, strlen( prompt ) );
+	// Currently character read
+	unsigned char newChar;
 
-  // Currently character read
-  unsigned char newChar;
+	// Last character read
+	unsigned char oldChar = 0;
 
-  // Last character read
-  unsigned char lastChar = 0;
+	// test get current working directory
+	char cwd[size + 1] = {0};
+	getcwd(cwd, sizeof(cwd));
+	int i;
+	for(i = 0; i < 1025; i++) 
+		fprintf(stderr, "%c", cwd[i]);
+	
+	fprintf(stderr, "\n");
 
-  //
-  // The client should send <name><cr><lf>
-  // Read the name of the client character by character until a
-  // <CR><LF> is found.
-  //
-    
-  while ( nameLength < MaxName &&
-	  ( n = read( fd, &newChar, sizeof(newChar) ) ) > 0 ) {
+	fprintf(stderr, "%lu\n", sizeof(cwd));
+	fprintf(stderr, "cwd = %s\n", cwd);
+	// test done
 
-	  // test the output of read()
-	  // if not EOF, return 1, EOF return -1;
-	  fprintf(stderr, " %d ", n);
-	  // memdump request from client
-	  memdump( (unsigned char*) &newChar, 1);
-
-    if ( lastChar == '\015' && newChar == '\012' ) {
-      // Discard previous <CR> from name
-      nameLength--;
-      break;
-    }
-
-    name[ nameLength ] = newChar;
-    nameLength++;
-
-    lastChar = newChar;
-  }
-
-  // Add null character at the end of the string
-  name[ nameLength ] = 0;
-
-  printf( "\nname=%s\n", name );
-
-  // Get time of day
-  time_t now;
-  time(&now);
-  char	*timeString = ctime(&now);
-
-  // Send name and greetings
-  const char * hi = "\nHi ";
-  const char * timeIs = " the time is:\n";
-  write( fd, hi, strlen( hi ) );
-  // strlen return 3 for hi;
-  write( fd, name, strlen( name ) );
-  write( fd, timeIs, strlen( timeIs ) );
-
-  // memdump send contents from server
-  memdump( (unsigned char*) hi, strlen(hi) );
-  memdump( (unsigned char*) name, strlen(name) );
-  memdump( (unsigned char*) timeIs, strlen(timeIs) );
-  
-  // Send the time of day 
-  write(fd, timeString, strlen(timeString));
-  memdump( (unsigned char*) timeString, strlen(timeString) );
-
-  // Send last newline
-  const char * newline="\n";
-  write(fd, newline, strlen(newline));
-  memdump( (unsigned char*) newline, strlen(newline) );
 }
+
+//void
+//processTimeRequest( int fd )
+//{
+  //// Buffer used to store the name received from the client
+  //const int MaxName = 1024;
+  //char name[ MaxName + 1 ];
+  //int nameLength = 0;
+  //int n;
+
+  //// Send prompt
+  //const char * prompt = "\nType your name:";
+  //write( fd, prompt, strlen( prompt ) );
+
+  //// Currently character read
+  //unsigned char newChar;
+
+  //// Last character read
+  //unsigned char lastChar = 0;
+
+  ////
+  //// The client should send <name><cr><lf>
+  //// Read the name of the client character by character until a
+  //// <CR><LF> is found.
+  ////
+    
+  //while ( nameLength < MaxName &&
+	  //( n = read( fd, &newChar, sizeof(newChar) ) ) > 0 ) {
+
+	  //// test the output of read()
+	  //// if not EOF, return 1, EOF return -1;
+	  ////fprintf(stderr, " %d ", n);
+	  //// memdump request from client
+	  //memdump( (unsigned char*) &newChar, 1);
+
+    //if ( lastChar == '\015' && newChar == '\012' ) {
+      //// Discard previous <CR> from name
+      //nameLength--;
+      //break;
+    //}
+
+    //name[ nameLength ] = newChar;
+    //nameLength++;
+
+    //lastChar = newChar;
+  //}
+
+  //// Add null character at the end of the string
+  //name[ nameLength ] = 0;
+
+  //printf( "\nname=%s\n", name );
+
+  //// Get time of day
+  //time_t now;
+  //time(&now);
+  //char	*timeString = ctime(&now);
+
+  //// Send name and greetings
+  //const char * hi = "\nHi ";
+  //const char * timeIs = " the time is:\n";
+  ////write( fd, hi, strlen( hi ) );
+  //// strlen return 3 for hi;
+  ////write( fd, name, strlen( name ) );
+  ////write( fd, timeIs, strlen( timeIs ) );
+
+  //// memdump send contents from server
+  ////memdump( (unsigned char*) hi, strlen(hi) );
+  ////memdump( (unsigned char*) name, strlen(name) );
+  ////memdump( (unsigned char*) timeIs, strlen(timeIs) );
+  
+  //// Send the time of day 
+  ////write(fd, timeString, strlen(timeString));
+  ////memdump( (unsigned char*) timeString, strlen(timeString) );
+
+  //// Send last newline
+  ////const char * newline="\n";
+  ////write(fd, newline, strlen(newline));
+  ////memdump( (unsigned char*) newline, strlen(newline) );
+//}
