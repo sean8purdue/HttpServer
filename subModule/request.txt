@@ -1,0 +1,15 @@
+GET / HTTP/1.1
+Host: data.cs.purdue.edu:2100
+Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36
+(KHTML, like Gecko) Chrome/54.0.2840.59 Safari/537.36
+Accept:
+text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2
+Cookie: __utma=68442627.1174639942.1479229070.1480515040.1480714265.4;
+__utmz=68442627.1480515040.3.3.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided);
+__utma=141228339.1227480582.1480967270.1480967270.1481000130.2;
+__utmz=141228339.1480967270.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
